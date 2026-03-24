@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BenzaBot - Orquestrador de Respostas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
+        .page-container { overflow-y: auto; overflow-x: hidden; scroll-behavior: smooth; }
+        #flashMessage { z-index: 10000 !important; background-color: #22c55e !important; }
+    </style>
+</head>
+<body class="bg-secondary-color h-screen w-screen overflow-hidden flex flex-col font-sans">
+    <div id="flashMessage" role="alert" class="pointer-events-none fixed top-5 left-1/2 transform -translate-x-1/2"></div>
+    <div id="main-app" class="relative flex flex-col h-full w-full">
+        <header class="flex-none flex items-center justify-between p-4 bg-white shadow-md z-40 relative h-16 sm:h-auto">
+            <button onclick="toggleSidebar()" class="text-gray-700 hover:text-cyan-600 transition p-1 focus:outline-none focus:ring-2 focus:ring-cyan-500 rounded">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" />
+                </svg>
+            </button>
+            <div class="flex items-center space-x-2 absolute left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                <span class="text-lg sm:text-xl font-bold text-gray-800 hidden sm:inline">Orquestrador de Atendimento</span>
+                <span class="text-lg sm:text-xl font-bold text-gray-800 sm:hidden">ORI</span>
+                <span class="text-lg sm:text-xl font-bold text-cyan-600">Institucional</span>
+            </div>
+            <div class="w-8"></div>
+        </header>
+
+        <aside id="sidebar" class="fixed inset-y-0 left-0 bg-white shadow-2xl w-64 md:w-80 p-6 transition-transform duration-300 transform -translate-x-full z-50 flex flex-col">
+            <div class="flex justify-between items-center mb-8 border-b pb-4">
+                <h2 class="text-2xl font-bold text-gray-800">Menu</h2>
+                <button onclick="toggleSidebar()" class="text-gray-500 hover:text-red-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+                </button>
+            </div>
+            <nav class="space-y-2">
+                <button onclick="changePage(1)" class="nav-item w-full flex items-center p-3 text-lg font-medium text-gray-700 rounded-lg hover:bg-cyan-50 hover:text-cyan-700 transition">Página Inicial</button>
+                <button onclick="changePage(2)" class="nav-item w-full flex items-center p-3 text-lg font-medium text-gray-700 rounded-lg hover:bg-cyan-50 hover:text-cyan-700 transition">Estilizador</button>
+                <button onclick="openGlossary()" class="nav-item w-full flex items-center p-3 text-lg font-medium text-gray-700 rounded-lg hover:bg-cyan-50 hover:text-cyan-700 transition">Glossário de Tags</button>
+            </nav>
+            <div class="mt-auto pt-6 border-t text-xs text-gray-400"><p>Versão x.x.x (Cloud Architecture)</p></div>
+        </aside>
+
+        <main class="content-area flex-grow relative overflow-hidden bg-secondary-color w-full">
+            </main>
+
+        <footer class="flex-none p-3 bg-white border-t border-gray-200 text-center text-xs text-gray-400 z-40 hidden sm:block">
+            &copy; 2025 BenzaBot — Desenvolvido por Caio Alexandre Toledo de Faria
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
