@@ -19,12 +19,11 @@ O projeto utiliza uma orquestração de microsserviços para garantir alta dispo
 
 ## 📊 Fluxograma de Operação 
 
-```mermaid graph TD
+```mermaid
+graph TD
   A[Entrada: Pergunta + Protocolo] --> B{Logic App: Orquestrador}
   B --> C[Consulta: Argumentos Curados]
   C --> D[Azure Function: IA Estilização]
   D --> E{Switch: Identificar Fluxo/Equipe}
   E --> F[Gravar Auditoria & Logs]
   F --> G[Retorno: Resposta Estruturada ao Atendente]
-
-Desenvolvido por Caio Alexandre Toledo de Faria Unindo Pensamento Crítico, Ciência de Dados e Automação.
