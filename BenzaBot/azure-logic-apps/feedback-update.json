@@ -1,0 +1,51 @@
+{
+    "apiVersion": "2019-05-01",
+    "id": "/subscriptions/<YOUR_SUBSCRIPTION_ID>/resourceGroups/<YOUR_RESOURCE_GROUP>/providers/Microsoft.Logic/workflows/BenzaBot-Feedback-Update",
+    "name": "BenzaBot-Feedback-Update",
+    "type": "microsoft.logic/workflows",
+    "location": "brazilsouth",
+    "properties": {
+        "state": "Enabled",
+        "accessEndpoint": "https://<YOUR_LOGIC_APP_ENDPOINT>",
+        "definition": {
+            "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+            "triggers": {
+                "When_an_HTTP_request_is_received": {
+                    "type": "Request",
+                    "kind": "Http",
+                    "inputs": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "hash": { "type": "string" },
+                                "feedback": { "type": "integer" },
+                                "equipe": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            },
+            "actions": {
+                "Switch": {
+                    "cases": {
+                        "Validacao": {
+                            "case": "VALIDACAO",
+                            "actions": {
+                                "Atualizar_uma_linha": {
+                                    "type": "ApiConnection",
+                                    "inputs": {
+                                        "body": { "FEEDBACK": "@{triggerBody()?['feedback']}" },
+                                        "path": "/drives/me/files/<EXCEL_FILE_ID>/tables/<TABLE_ID>/items/@{encodeURIComponent(triggerBody()?['hash'])}",
+                                        "queries": { "idColumn": "HASH" }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "expression": "@coalesce(triggerBody()?['equipe'], 'DEFAULT')",
+                    "type": "Switch"
+                }
+            }
+        }
+    }
+}
