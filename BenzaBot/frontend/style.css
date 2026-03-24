@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+:root {
+    --primary-color: #06b6d4; /* Tailwind cyan-600 */
+    --primary-light: #22d3ee; /* Tailwind cyan-400 */
+    --secondary-color: #f0f4f8; /* Fundo Leve */
+    --text-color: #1f2937; /* Grey-800 */
+    --shadow-color: rgba(6, 182, 212, 0.25);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    height: 100vh;
+    overflow: hidden; /* Evita scroll desnecessário no body */
+}
+
+/* Estrutura Principal */
+#main-app {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Sidebar e Navegação */
+#sidebar {
+    width: 70vw;
+    max-width: 280px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 50;
+}
+#sidebar.open {
+    transform: translateX(0);
+}
+.nav-item {
+    transition: background-color 0.2s;
+}
+.nav-item:hover {
+    background-color: #e0f7fa; /* Light cyan hover */
+}
+
+/* Main Content Container & Page Transitions */
+.content-area {
+    flex-grow: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    position: relative;
+}
+.page-container {
+    display: none;
+    width: 100%;
+    height: 100%; /* Garante que o container ocupe toda a altura */
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1rem;
+    opacity: 0;
+    transform: scale(0.95);
+}
+.page-container.active {
+    /* display: block; REMOVIDO no original, mantido assim pois JS controla o display */
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Botão Principal de Ação */
+.main-action-button {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.main-action-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+/* Animação Sequencial dos Campos (Page 2) */
+#page2 .form-field {
+    transition: all 0.4s ease-out;
+    /* Definição de delay baseada no índice é feita via JS */
+}
+#page2.active .form-field {
+    opacity: 1 !important; 
+    transform: translateY(0) !important;
+}
+
+/* Loading Overlay (Spinner) */
+#loadingOverlay {
+    backdrop-filter: blur(4px);
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 60;
+    transition: opacity 0.3s;
+}
+.spinner {
+    border: 4px solid var(--primary-light);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Footer Typewriter Effect (Simplificado, apenas transição) */
+#typewriter-text {
+    overflow: hidden; 
+    white-space: nowrap;
+    border-right: .1em solid var(--primary-color); 
+    transition: width 0.5s steps(30, end);
+    animation: blink-caret .75s step-end infinite;
+}
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--primary-color); }
+}
+
+/* --- ESTILOS DO CHATBOT MODAL --- */
+#chatBotOverlay {
+    z-index: 70;
+    backdrop-filter: blur(3px);
+    background-color: rgba(0, 0, 0, 0.4);
+    display: none;
+}
+#chatbotContainer {
+    width: 95%;
+    max-width: 400px;
+    max-height: 80vh;
+    transform: translateY(100%); /* Inicialmente fora da tela */
+    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+#chatbotContainer.active {
+    transform: translateY(0); /* Sobe para a tela */
+}
+#chatContent {
+    height: calc(80vh - 120px); /* Altura do container - cabeçalho - input */
+    overflow-y: auto;
+    padding: 1rem;
+    background-color: white;
+}
+
+/* Mensagens do Chat */
+.user-message, .bot-message {
+    max-width: 80%;
+    padding: 0.75rem 1rem;
+    border-radius: 1.25rem;
+    margin-bottom: 0.75rem;
+    word-wrap: break-word;
+}
+.user-message {
+    background-color: var(--primary-color);
+    color: white;
+    margin-left: auto; /* Alinha à direita */
+    border-bottom-right-radius: 0.25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.bot-message-wrapper {
+    display: flex;
+    align-items: flex-start;
+    margin-right: auto; /* Alinha à esquerda */
+}
+.bot-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    flex-shrink: 0; /* Evita que o avatar encolha */
+}
+.bot-message {
+    background-color: #e2e8f0; /* Gray-200 */
+    color: var(--text-color);
+    border-bottom-left-radius: 0.25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    flex-grow: 1;
+}
+
+/* --- ESTILOS DO FEEDBACK DE ESTRELAS (Page 3) --- */
+.star-icon {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    color: #d1d5db; /* Cor padrão: cinza claro */
+    transition: color 0.2s;
+}
+/* Cor de preenchimento (Cyan) para estrelas ativas ou hover */
+.star-icon.star-filled {
+    color: var(--primary-light); 
+}
+.star-icon:hover {
+    color: var(--primary-light); 
+}
+
+/* --- ESTILOS FLASH MESSAGE (Validação) --- */
+#flashMessage {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100px);
+    opacity: 0;
+    padding: 12px 20px;
+    background-color: #f87171; /* Red-400 */
+    color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    transition: all 0.4s ease-out;
+    text-align: center;
+}
+#flashMessage.active {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Estilo para a barra de rolagem no container de resposta */
+.response-scroll-container {
+    max-height: 24rem; /* Altura máxima de 96 tailwind units (24*4=96) */
+    overflow-y: auto; /* Garante scroll vertical */
+}
