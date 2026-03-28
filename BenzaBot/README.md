@@ -32,6 +32,21 @@ graph TD
 ```
 
 ---
+## Demonstração Visual
+
+### Interface do Usuário (UI)
+| Home Page | Orquestrador (ORI) | Menu e Glossário |
+| :---: | :---: | :---: |
+| ![Home](./assets/ui-home.png) | ![ORI](./assets/ui-formulario.png) | ![Menu](./assets/ui-sidebar.png) |
+
+### Arquitetura e Fluxos (Azure Cloud)
+#### Processamento de Respostas (RAG)
+![Logic Flow](./assets/logic-processing-flow.png)
+*Fluxo agêntico integrando gatilhos HTTP, base de dados Excel e Azure Functions com IA.*
+
+#### Ciclo de Feedback e Melhoria Contínua
+![Feedback Flow](./assets/logic-feedback-flow.png)
+*Mecanismo de captura de feedback para redução de variabilidade conforme métricas Lean Seis Sigma.*
 
 ## Orquestração de IA & Engenharia de Prompt
 O BenzaBot opera como um sistema de **RAG (Retrieval-Augmented Generation)** resiliente, garantindo que a IA nunca invente regras institucionais.
