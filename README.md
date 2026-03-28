@@ -1,5 +1,10 @@
 # Soluções de Eficiência Acadêmica
 
+![Azure](https://img.shields.io/badge/azure-%230072C6.svg?style=for-the-badge&logo=microsoftazure&logoColor=white)
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![Lean Six Sigma](https://img.shields.io/badge/Lean%20Six%20Sigma-Metodologia-black?style=for-the-badge)
+
 Este repositório centraliza projetos de arquitetura e automação desenvolvidos para otimizar processos no setor educacional, integrando Inteligência Artificial, Cloud Computing (Azure) e metodologias de melhoria contínua (Lean Seis Sigma).
 
 ---
